@@ -5,7 +5,7 @@
 <h1 align="center">Azora Language Book Website</h1>
 
 <p align="center">
-  The official website for <a href="https://book.azoralang.org">The Azora Language Book</a>, a comprehensive guide to the <a href="https://azoralang.org">Azora</a> programming language.
+  The official website for <a href="https://book.azoralang.org">The Azora Language Book</a>, a comprehensive guide to the <a href="https://azoralang.org">Azora Programming Language</a>.
 </p>
 
 <p align="center">
