@@ -11,7 +11,7 @@ import Lambdas from './10-lambdas.jsx'
 import VariadicLambdas from './11-variadic-lambdas.jsx'
 import Packs from './12-packs.jsx'
 import Enums from './13-enums.jsx'
-import Slots from './14-forms.jsx'
+import Slots from './14-slots.jsx'
 import ImplBlocks from './15-impl-blocks.jsx'
 import InfixFunctions from './16-infix-functions.jsx'
 import Generics from './17-generics.jsx'
@@ -33,6 +33,11 @@ import Contracts from './32-contracts.jsx'
 import CTCE from './33-ctce.jsx'
 import OperatorOverloading from './34-operator-overloading.jsx'
 import Reactivity from './35-reactivity.jsx'
+import ErrorHandling from './36-error-handling.jsx'
+import Trees from './37-trees.jsx'
+import BridgeFFI from './38-bridge-ffi.jsx'
+import MemoryManagement from './39-memory.jsx'
+import CompilationTargets from './40-compilation-targets.jsx'
 
 export const sections = [
   { id: 'introduction', number: 1, title: 'Introduction', component: Introduction },
@@ -70,4 +75,9 @@ export const sections = [
   { id: 'flip-flop', number: 33, title: 'Flip/Flop', component: FlipFlop },
   { id: 'nullable-types', number: 34, title: 'Nullable Types', component: NullableTypes },
   { id: 'standard-library', number: 35, title: 'Standard Library', component: StandardLibrary },
+  { id: 'error-handling', number: 36, title: 'Error Handling', component: ErrorHandling },
+  { id: 'trees', number: 37, title: 'Trees (Inheritance)', component: Trees },
+  { id: 'bridge-ffi', number: 38, title: 'Bridge (FFI)', component: BridgeFFI },
+  { id: 'memory-management', number: 39, title: 'Memory Management', component: MemoryManagement },
+  { id: 'compilation-targets', number: 40, title: 'Compilation Targets', component: CompilationTargets },
 ]
