@@ -263,14 +263,14 @@ tree SavingsAccount(var interest: Real, var balance: Int) : Account(balance) {
       <p className="mt-2 text-az-35">
         Secondary constructors provide alternative ways to create an instance. They are declared
         with <code className="text-az-primary">ctor</code> and must delegate to the primary constructor
-        using <code className="text-az-primary">: self(args)</code>.
+        using <code className="text-az-primary">: this(args)</code>.
       </p>
       <CodeBlock>{`tree Rect(var width: Real, var height: Real) {
     // Secondary constructor: create a square
-    ctor(side: Real) : self(side, side)
+    ctor(side: Real) : this(side, side)
 
     // Confined secondary constructor: internal factory
-    confine ctor(scale: Int) : self(scale * 1.0, scale * 1.0)
+    confine ctor(scale: Int) : this(scale * 1.0, scale * 1.0)
 
     func area(): Real {
         return width * height

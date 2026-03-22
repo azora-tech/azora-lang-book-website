@@ -18,20 +18,20 @@ export default function CTCE() {
     return n * factorial(n - 1)
 }
 
-fin $result = factorial(10)   // computed at compile time
-// $result is 3628800, no runtime computation needed`}</CodeBlock>
+inline fin result = factorial(10)   // computed at compile time
+// result is 3628800, use $result to reference it in emitted code`}</CodeBlock>
       <p className="mt-2 text-az-35">
-        The <code className="text-az-primary">$</code> prefix marks a compile-time variable. The right-hand side
-        function call is evaluated entirely during preprocessing. The result replaces the variable
-        in the emitted code as a literal constant.
+        The <code className="text-az-primary">inline fin</code> keyword declares a compile-time constant.
+        The right-hand side function call is evaluated entirely during preprocessing. Use
+        the <code className="text-az-primary">$name</code> syntax to reference the value in emitted code.
       </p>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">26.2 Inline Variables (inline fin, inline var)</h3>
       <p className="mt-2 text-az-35">
         The <code className="text-az-primary">inline fin</code> and <code className="text-az-primary">inline var</code> syntax
-        declares compile-time constants and mutable compile-time variables without
-        the <code className="text-az-primary">$</code> prefix. They are evaluated and substituted during
-        preprocessing. Reference them with <code className="text-az-primary">$name</code> in the emitted code.
+        declares compile-time constants and mutable compile-time variables. They are evaluated
+        and substituted during preprocessing. Reference them with <code className="text-az-primary">$name</code> in
+        the emitted code.
       </p>
       <CodeBlock>{`inline fin x = 42
 func main() {
@@ -83,7 +83,7 @@ inline if VERBOSE {
       <p className="mt-2 text-az-35">
         <code className="text-az-primary">inline if</code> supports <code className="text-az-primary">else</code> branches:
       </p>
-      <CodeBlock>{`fin $x = 0
+      <CodeBlock>{`inline fin x = 0
 
 inline if $x > 0 {
     func positive() {}
@@ -250,22 +250,22 @@ deepinline for i in 0..3 {
         or as compile-time constants.
       </p>
       <CodeBlock>{`// .length
-fin $len = "hello".length           // $len = 5
+inline fin len = "hello".length           // len = 5
 
 // .contains()
-fin $has = "hello world".contains("world")    // $has = true
+inline fin has = "hello world".contains("world")    // has = true
 
 // .startsWith()
-fin $starts = "azora".startsWith("az")        // $starts = true
+inline fin starts = "azora".startsWith("az")        // starts = true
 
 // .toUpper()
-fin $upper = "hello".toUpper()                // $upper = "HELLO"
+inline fin upper = "hello".toUpper()                // upper = "HELLO"
 
-// String interpolation
+// String interpolation in CT functions
 func greet(name: String): String {
-    return "Hello, $name!"
+    return "Hello, " + name + "!"
 }
-fin $msg = greet("Azora")                     // $msg = "Hello, Azora!"`}</CodeBlock>
+inline fin msg = greet("Azora")                     // msg = "Hello, Azora!"`}</CodeBlock>
       <p className="mt-2 text-az-35">
         Compile-time strings are properly escaped when substituted into the emitted source code.
         Quotes, backslashes, newlines, and tabs are all handled correctly.

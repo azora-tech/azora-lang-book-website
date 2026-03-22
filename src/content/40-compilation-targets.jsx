@@ -80,30 +80,31 @@ func connectDatabase(url: String): Connection {
       </p>
       <ul className="list-disc list-inside mt-2 text-az-35 space-y-1">
         <li>Packs become ES6 classes with constructor parameters</li>
-        <li>String interpolation uses template literals (<code className="text-az-primary">{"`${expr}`"}</code>)</li>
+        <li>String interpolation uses JS template literals</li>
         <li>Arrays map directly to JavaScript arrays</li>
         <li>Tests output PASS/FAIL messages to the console</li>
         <li>Enums become frozen object literals</li>
       </ul>
-      <CodeBlock>{`// Azora source
+      <CodeBlock language="azora">{`// Azora source
 pack User {
-    name: String
-    age: Int
+    var name: String
+    var age: Int
 }
 
 fin u = User(name: "Alice", age: 30)
-println("Hello, \\{u.name}!")
+println("Hello, " + u.name + "!")`}</CodeBlock>
+      <p className="mt-2 text-az-35">
+        Generated JavaScript (simplified):
+      </p>
+      <CodeBlock language="javascript">{`class User {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
 
-// Generated JavaScript (simplified)
-// class User {
-//     constructor(name, age) {
-//         this.name = name;
-//         this.age = age;
-//     }
-// }
-//
-// const u = new User("Alice", 30);
-// console.log(\`Hello, \${u.name}!\`);`}</CodeBlock>
+const u = new User("Alice", 30);
+console.log("Hello, " + u.name + "!");`}</CodeBlock>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">40.4 Kotlin Target</h3>
       <p className="mt-2 text-az-35">
@@ -112,24 +113,25 @@ println("Hello, \\{u.name}!")
       </p>
       <ul className="list-disc list-inside mt-2 text-az-35 space-y-1">
         <li>Packs become Kotlin data classes</li>
-        <li>String interpolation uses <code className="text-az-primary">{"\"$var\""}</code> and <code className="text-az-primary">{"\"${expr}\""}</code></li>
         <li>Specs map to Kotlin interfaces</li>
         <li>Bridge .JVM maps to direct Kotlin/Java function calls</li>
+        <li>fin becomes val, var stays var</li>
       </ul>
-      <CodeBlock>{`// Azora source
+      <CodeBlock language="azora">{`// Azora source
 pack Point {
-    x: Real
-    y: Real
+    var x: Real
+    var y: Real
 }
 
 fin p = Point(x: 1.0, y: 2.0)
-println("Point: \\{p.x}, \\{p.y}")
+println("Point: " + p.x as String + ", " + p.y as String)`}</CodeBlock>
+      <p className="mt-2 text-az-35">
+        Generated Kotlin (simplified):
+      </p>
+      <CodeBlock language="kotlin">{`data class Point(val x: Double, val y: Double)
 
-// Generated Kotlin (simplified)
-// data class Point(val x: Double, val y: Double)
-//
-// val p = Point(1.0, 2.0)
-// println("Point: \${p.x}, \${p.y}")`}</CodeBlock>
+val p = Point(1.0, 2.0)
+println("Point: " + p.x.toString() + ", " + p.y.toString())`}</CodeBlock>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">40.5 C# Target</h3>
       <p className="mt-2 text-az-35">
@@ -137,46 +139,47 @@ println("Point: \\{p.x}, \\{p.y}")
       </p>
       <ul className="list-disc list-inside mt-2 text-az-35 space-y-1">
         <li>Packs become C# classes with properties</li>
-        <li>String interpolation uses <code className="text-az-primary">{"$\"{expr}\""}</code></li>
         <li>Specs map to C# interfaces</li>
         <li>Bridge .CS maps to static method calls</li>
+        <li>fin becomes readonly fields</li>
       </ul>
-      <CodeBlock>{`// Azora source
+      <CodeBlock language="azora">{`// Azora source
 pack Item {
-    name: String
-    price: Real
+    var name: String
+    var price: Real
 }
 
 fin item = Item(name: "Widget", price: 9.99)
-println("\\{item.name}: $\\{item.price}")
+println(item.name + ": " + item.price as String)`}</CodeBlock>
+      <p className="mt-2 text-az-35">
+        Generated C# (simplified):
+      </p>
+      <CodeBlock language="csharp">{`public class Item {
+    public string Name { get; }
+    public double Price { get; }
+    public Item(string name, double price) {
+        Name = name;
+        Price = price;
+    }
+}
 
-// Generated C# (simplified)
-// public class Item {
-//     public string Name { get; }
-//     public double Price { get; }
-//     public Item(string name, double price) {
-//         Name = name;
-//         Price = price;
-//     }
-// }
-//
-// var item = new Item("Widget", 9.99);
-// Console.WriteLine($"{item.Name}: ${item.Price}");`}</CodeBlock>
+var item = new Item("Widget", 9.99);
+Console.WriteLine(item.Name + ": " + item.Price.ToString());`}</CodeBlock>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">40.6 Python Target</h3>
       <p className="mt-2 text-az-35">
-        The Python target generates Python 3 code with type hints.
+        The Python target generates Python 3 code.
       </p>
       <ul className="list-disc list-inside mt-2 text-az-35 space-y-1">
         <li>Packs become Python classes with <code className="text-az-primary">__init__</code></li>
-        <li>String interpolation uses f-strings (<code className="text-az-primary">{"f\"{expr}\""}</code>)</li>
         <li>Integer division uses <code className="text-az-primary">//</code> for int operands</li>
         <li>Bridge .PY maps to Python function calls</li>
+        <li>Operator overloading maps to Python dunder methods</li>
       </ul>
-      <CodeBlock>{`// Azora source
+      <CodeBlock language="azora">{`// Azora source
 pack Rect {
-    width: Int
-    height: Int
+    var width: Int
+    var height: Int
 }
 
 impl Rect {
@@ -186,21 +189,21 @@ impl Rect {
 }
 
 fin r = Rect(width: 10, height: 5)
-fin a = r.area()
-println("Area: \\{a}")
+println(r.area() as String)`}</CodeBlock>
+      <p className="mt-2 text-az-35">
+        Generated Python (simplified):
+      </p>
+      <CodeBlock language="python">{`class Rect:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
 
-// Generated Python (simplified)
-// class Rect:
-//     def __init__(self, width: int, height: int):
-//         self.width = width
-//         self.height = height
-//
-//     def area(self) -> int:
-//         return self.width * self.height
-//
-// r = Rect(10, 5)
-// a = r.area()
-// print(f"Area: {a}")`}</CodeBlock>
+def _impl_area(self):
+    return self.width * self.height
+Rect.area = _impl_area
+
+r = Rect(10, 5)
+print(str(r.area()))`}</CodeBlock>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">40.7 Swift Target</h3>
       <p className="mt-2 text-az-35">
@@ -212,33 +215,34 @@ println("Area: \\{a}")
         <li>Tree inheritance maps to class inheritance</li>
         <li>Bridge .SWIFT maps to Foundation and native Swift calls</li>
       </ul>
-      <CodeBlock>{`// Azora source
+      <CodeBlock language="azora">{`// Azora source
 spec Drawable {
     func draw(): String
 }
 
 pack Circle {
-    radius: Real
+    var radius: Real
 }
 
-impl Circle for Drawable {
+impl Drawable for Circle {
     func draw(): String { ref self ->
-        "Circle with radius \\{self.radius}"
+        return "Circle with radius " + self.radius as String
     }
+}`}</CodeBlock>
+      <p className="mt-2 text-az-35">
+        Generated Swift (simplified):
+      </p>
+      <CodeBlock language="swift">{`protocol Drawable {
+    func draw() -> String
 }
 
-// Generated Swift (simplified)
-// protocol Drawable {
-//     func draw() -> String
-// }
-//
-// class Circle: Drawable {
-//     let radius: Double
-//     init(radius: Double) { self.radius = radius }
-//     func draw() -> String {
-//         return "Circle with radius \\(self.radius)"
-//     }
-// }`}</CodeBlock>
+class Circle: Drawable {
+    let radius: Double
+    init(radius: Double) { self.radius = radius }
+    func draw() -> String {
+        return "Circle with radius " + String(describing: self.radius)
+    }
+}`}</CodeBlock>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">40.8 LLVM IR Target</h3>
       <p className="mt-2 text-az-35">
@@ -250,7 +254,7 @@ impl Circle for Drawable {
         <li>Bridge .C maps to C function declarations (extern)</li>
         <li>Low-level pointer operations are fully supported</li>
         <li>Memory management primitives compile to direct LLVM instructions</li>
-        <li>Optimized via LLVM's optimization passes</li>
+        <li>Optimized via LLVM optimization passes</li>
       </ul>
       <CodeBlock>{`// Azora source targeting native
 @target(.Native)
@@ -290,15 +294,11 @@ impl Counter {
     }
 }
 
-var c = Counter()
-c.increment()
-c.increment()
-assert c.count == 2
-
 test "counter increments correctly" {
     var c = Counter()
     c.increment()
-    assert c.count == 1
+    c.increment()
+    assert c.count == 2 { "count should be 2" }
 }`}</CodeBlock>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">40.10 Writing Cross-Platform Code</h3>
@@ -326,11 +326,6 @@ bridge .JVM {
     func System.currentTimeMillis as az_clock(): Int
 }
 
-@target(.Csharp)
-bridge .CS {
-    func DateTimeOffset.UtcNow.ToUnixTimeMilliseconds as az_clock(): Int
-}
-
 @target(.Python)
 bridge .PY {
     func time.time_ns as az_clock(): Int
@@ -352,7 +347,7 @@ expose scope std {
 
 // Consumer code, works on every target
 fin timestamp = std.time.now()
-println("Current time: \\{timestamp}")`}</CodeBlock>
+println("Current time: " + timestamp as String)`}</CodeBlock>
       <p className="mt-2 text-az-35">
         This layered approach keeps platform details isolated. The bridge declarations
         handle the FFI mapping, the <code className="text-az-primary">@target</code> annotations
@@ -361,7 +356,7 @@ println("Current time: \\{timestamp}")`}</CodeBlock>
       </p>
 
       <p className="mt-4 text-sm text-az-50">
-        Tip: Start by writing your logic without any <code className="text-az-primary">@target</code> annotations.
+        <strong>Tip:</strong> Start by writing your logic without any <code className="text-az-primary">@target</code> annotations.
         Only add platform-specific code when you need to call into a foreign API. This maximizes
         code reuse across all backends.
       </p>

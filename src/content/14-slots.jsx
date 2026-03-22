@@ -81,20 +81,20 @@ r2.code     // 404`}</CodeBlock>
         that produces a value.
       </p>
       <CodeBlock>{`var desc = when shape {
-    .Circle -> "circle with radius " + toString(shape.radius)
-    .Rect -> "rectangle " + toString(shape.width) + "x" + toString(shape.height)
-    .Point -> "a point"
+    is .Circle -> "circle with radius " + toString(shape.radius)
+    is .Rect -> "rectangle " + toString(shape.width) + "x" + toString(shape.height)
+    is .Point -> "a point"
 }`}</CodeBlock>
       <p className="mt-2 text-az-35">
-        Each branch uses the dot shorthand (<code className="text-az-primary">.Variant</code>)
-        to match against variant names. The compiler infers the slot type from the subject of
+        Each branch uses <code className="text-az-primary">is .Variant</code> to test which
+        variant is active. The compiler infers the slot type from the subject of
         the <code className="text-az-primary">when</code> expression.
       </p>
       <CodeBlock>{`func describe(r: Result): String {
     return when r {
-        .Success -> "OK: " + r.data
-        .Error -> "Error code: " + toString(r.code)
-        .Loading -> "Loading..."
+        is .Success -> "OK: " + r.data
+        is .Error -> "Error code: " + toString(r.code)
+        is .Loading -> "Loading..."
     }
 }`}</CodeBlock>
 
@@ -114,8 +114,8 @@ if shape is Shape {
 
 // Check variant type with pattern matching
 var isCircle = when shape {
-    .Circle -> true
-    else -> false
+    is .Circle -> true
+    _ -> false
 }`}</CodeBlock>
       <p className="mt-2 text-az-35">
         The <code className="text-az-primary">is</code> operator works with any type, not just
@@ -133,9 +133,9 @@ assert c is Char`}</CodeBlock>
       </p>
       <CodeBlock>{`// In when branches
 when result {
-    .Success -> handleSuccess(result.data)
-    .Error -> handleError(result.code)
-    .Loading -> showSpinner()
+    is .Success -> handleSuccess(result.data)
+    is .Error -> handleError(result.code)
+    is .Loading -> showSpinner()
 }
 
 // In assignment when the type is known

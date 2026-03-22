@@ -20,7 +20,7 @@ export default function VariadicGenerics() {
         fields.
       </p>
       <CodeBlock>{`pack Tuple<T...> {
-    inline for Ty in T with $index {
+    inline for Ty in T with index {
         t$index: Ty = _
     }
 }
@@ -64,11 +64,11 @@ var bad = add(2, "hello", 7)    // ERROR: String does not implement Numeric`}</C
       <p className="mt-2 text-az-35">
         Use <code className="text-az-primary">inline for</code> to iterate over a type parameter
         pack at compile time. The loop body is expanded once per type in the pack. The{' '}
-        <code className="text-az-primary">with $index</code> clause provides a compile-time
+        <code className="text-az-primary">with index</code> clause provides a compile-time
         index for generating unique names.
       </p>
       <CodeBlock>{`pack Record<T...> {
-    inline for Ty in T with $index {
+    inline for Ty in T with index {
         field$index: Ty = _
     }
 }
@@ -98,10 +98,10 @@ var t = makeTuple(42, "hello", true)
 // t.t1 == "hello"
 // t.t2 == true`}</CodeBlock>
       <p className="mt-2 text-az-35">
-        The <code className="text-az-primary">promote!</code> type function computes the widest
+        The <code className="text-az-primary">promote</code> type function computes the widest
         type across all pack members, useful for reduction functions:
       </p>
-      <CodeBlock>{`func<T...> add(args: T...): promote!T
+      <CodeBlock>{`func<T...> add(args: T...): promote(T)
 where each T: Numeric {
     var sum: ReturnType = _
     for arg in args {
@@ -110,7 +110,7 @@ where each T: Numeric {
     return sum
 }
 
-var x = add(2, 3.4, 7, 9, 1.2)    // promote!T is Real`}</CodeBlock>
+var x = add(2, 3.4, 7, 9, 1.2)    // promote(T) is Real`}</CodeBlock>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">20.5 Length Constraints</h3>
       <p className="mt-2 text-az-35">
@@ -119,7 +119,7 @@ var x = add(2, 3.4, 7, 9, 1.2)    // promote!T is Real`}</CodeBlock>
         with too few or too many type arguments.
       </p>
       <CodeBlock>{`pack Tuple<T...> where T.length >= 2 {
-    inline for Ty in T with $index {
+    inline for Ty in T with index {
         t$index: Ty = _
     }
 }
@@ -140,7 +140,7 @@ var bad = Tuple<Int>(t0: 1)`}</CodeBlock>
         Variadic generics are fully resolved at compile time. The preprocessor expands{' '}
         <code className="text-az-primary">T...</code> into concrete types,{' '}
         <code className="text-az-primary">inline for</code> into repeated declarations, and{' '}
-        <code className="text-az-primary">promote!</code> into a single concrete type. The
+        <code className="text-az-primary">promote</code> into a single concrete type. The
         generated code contains no traces of the variadic machinery.
       </p>
     </Section>

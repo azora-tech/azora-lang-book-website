@@ -25,16 +25,16 @@ export default function TypeFunctions() {
         Parameters have the special type <code className="text-az-primary">Type</code>. The body uses
         compile-time logic (conditionals, loops, property access) to compute and return a type.
         Type functions are invoked in type-annotation position using
-        the <code className="text-az-primary">!</code> suffix:
+        regular function call syntax:
       </p>
-      <CodeBlock>{`func<T1, T2> add(a: T1, b: T2): promote!(T1, T2)
+      <CodeBlock>{`func<T1, T2> add(a: T1, b: T2): promote(T1, T2)
 where T1: Numeric, T2: Numeric {
     var sum: ReturnType = _
     return sum
 }
 
-// promote!(Int, Real) resolves to Real
-// promote!(Int, Int) resolves to Int`}</CodeBlock>
+// promote(Int, Real) resolves to Real
+// promote(Int, Int) resolves to Int`}</CodeBlock>
 
       <h3 className="text-lg font-semibold mt-6 mb-2 text-az-25">22.2 Using typename Property</h3>
       <p className="mt-2 text-az-35">

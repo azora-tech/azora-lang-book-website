@@ -106,10 +106,10 @@ var name = when c {
       </p>
       <CodeBlock>{`var move = Direction.Up
 when move {
-    .Up -> println("moving by dy=${ move.dy}")
-    .Down -> println("moving by dy=${ move.dy}")
-    .Left -> println("moving by dx=${ move.dx}")
-    .Right -> println("moving by dx=${ move.dx}")
+    .Up -> println("moving by dy=" + move.dy as String)
+    .Down -> println("moving by dy=" + move.dy as String)
+    .Left -> println("moving by dx=" + move.dx as String)
+    .Right -> println("moving by dx=" + move.dx as String)
 }`}</CodeBlock>
 
       <p className="mt-4 text-az-35">

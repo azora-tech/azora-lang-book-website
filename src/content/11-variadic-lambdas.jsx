@@ -61,9 +61,9 @@ assert indexSum(10, 20, 30) == 3    // 0 + 1 + 2`}</CodeBlock>
         <code className="text-az-primary">$</code>-prefixed names for compile-time values:
       </p>
       <CodeBlock>{`var indexSum = <T...>{
-    inline var $total = 0
-    inline for _ in $it with $i {
-        $total += $i
+    inline var total = 0
+    inline for _ in it with i {
+        $total = $total + $i
     }
     $total
 }`}</CodeBlock>
