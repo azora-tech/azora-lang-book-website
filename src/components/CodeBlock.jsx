@@ -56,7 +56,7 @@ function azora(Prism) {
       pattern: /\bnull\b/,
       alias: 'boolean',
     },
-    keyword: /\b(?:var|fin|func|hook|test|if|else|for|loop|while|in|as|is|when|return|break|continue|expose|confine|protect|inline|deepinline|noinline|enum|slot|pack|impl|infx|deco|scope|package|use|flip|flop|by|typealias|spec|where|each|type|let|task|suspend|flow|yield|launch|async|await|assert|trace|with|self|this|base|prop|it|fail|try|catch|defer|alloc|drop|tree|repl|seal|ctor|dtor|threadlocal|oper|ref|mut|dyn|out|solo|inject|wrap|bind|lazy|rem|view|effect|guard|throw|rescue|bridge|unsafe|region|isolated|reverse)\b/,
+    keyword: /\b(?:var|fin|func|hook|test|if|else|for|loop|while|in|as|is|when|return|break|continue|expose|confine|protect|inline|deepinline|noinline|enum|slot|pack|impl|infx|deco|scope|package|use|flip|flop|by|typealias|spec|where|each|type|let|task|suspend|flow|yield|launch|async|await|assert|trace|with|self|this|base|prop|it|fail|try|catch|defer|alloc|drop|node|repl|leaf|ctor|dtor|threadlocal|oper|ref|mut|dyn|out|solo|inject|wrap|bind|lazy|rem|view|effect|guard|throw|rescue|bridge|unsafe|region|isolated|reverse)\b/,
     'type-name': {
       pattern: /\b[A-Z][a-zA-Z0-9_]*\b/,
       alias: 'class-name',
